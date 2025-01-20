@@ -72,6 +72,7 @@ body {
   .like-button {
     all: unset;
     cursor: pointer;
+    background: transparent;
   }
 
   .likes-counter {
