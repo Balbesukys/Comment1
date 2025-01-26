@@ -56,68 +56,169 @@
         </div>
        </div>
 </div>
-<script>
-  const lielement = document.querySelector('.comment')
-  const buttonEL = document.querySelector('.add-comment-button')
-  const ulElement = document.querySelector('.comments')
-  const nameStyle = document.querySelector('.add-coment-name')
-  const textStyle = document.querySelector('.add-coment-text')
+<!DOCTYPE html>
+<html lang="ru">
 
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Комментарии</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
 
-  buttonEL.addEventListener('click', function() {
-    const name = document.querySelector(".add-comment-name").value;
-    const text = document.querySelector('add-comment-text').value;
+<body>
+    <div class="container">
+        <ul class="comments"></ul>
+        <div class="add-comment">
+            <input type="text" class="add-comment-name" placeholder="Введите ваше имя">
+            <textarea class="add-comment-text" placeholder="Введите ваш комментарий" rows="4"></textarea>
+            <div class="add-comment-butt">
+                <button class="add-comment-button">Отправить</button>
+            </div>
+        </div>
+    </div>
 
-    if (name === '' || name === ' ') {
-      nameStyle.style.border = '4px solid';
-      nameStyle.style.borderColor = 'red';
-      nameStyle.placeholder = "Введите комментарий!"
-      return;
-    } else if (text === '' || text === ' ') {
-      textStyle.style.border = '4px solid';
-      textStyle.style.borderColor = 'red';
-      textStyle.placeholder = "Введите комментарий!"
-      return;
-    } else {
-      nameStyle.style.border = '';
-      nameStyle.style.borderColor = '';
-      document.querySelector('.add-comment-name').value = '';
-      nameStyle.placeholder = "Введите ваше имя"
-      textStyle.placeholder = "Введите ваш комментарий"
-      textStyle.style.border = '';
-      textStyle.style.borderColor = '';
-      document.querySelector('.add-comment-text').value = '';
-    };
-      let dateTime = new Date();
-      dateTime = dateTime.toLocaleDateString('ru-RU', {
-        year:'2-digit',
-        month: '2-digit',
-        day: '2-digit'
-      }) + ' ' + dateTime.toLocaleDateString('ru_RU', {
-      hour: '2-digit',
-      minute: '2-digit'})
+    <script>
+        const buttonEL = document.querySelector('.add-comment-button');
+        const ulElement = document.querySelector('.comments');
+        const nameInput = document.querySelector('.add-comment-name');
+        const textInput = document.querySelector('.add-comment-text');
 
-      const oldHtml = ulElement.innerHTML;
-      ulElement.innerHTML = oldHtml + `
-      <li class="comment">
-        <div class="comment-header"
-          <div>${name}</div>
-         <div>${dateTime}</div>
-       </div>
-       <div class="comment-body">
-         <div class="comment-text">
-            ${text}
-         </div>
-       </div>
-       <div class="comment-footer">
-          <div class="likes">
-            <span class="likes-counter">0</span>
-           <button class="like-button"></button>
-          </div>
-       </div>
-      </li>`;
-  });
-</script>
+        // Массив комментариев
+        let comments = [
+            {
+                name: "Роман М.",
+                dateTime: "16.01.25 12:24",
+                text: "Первый комментарий",
+                likes: 10,
+                liked: false,
+                replies: []
+            },
+            {
+                name: "Алексей А.",
+                dateTime: "16.01.25 19:58",
+                text: "Мне нравится как оформлена эта страница!",
+                likes: 105,
+                liked: true,
+                replies: []
+            }
+        ];
+
+        // Функция для рендеринга комментариев
+        function renderComments() {
+            ulElement.innerHTML = ''; // Очищаем текущие комментарии
+            comments.forEach((comment, index) => {
+                const commentHTML = `
+                    <li class="comment">
+                        <div class="comment-header">
+                            <div>${comment.name}</div>
+                            <div>${comment.dateTime}</div>
+                        </div>
+                        <div class="comment-body">
+                            <div class="comment-text">${comment.text}</div>
+                        </div>
+                        <div class="comment-footer">
+                            <div class="likes">
+                              
+                                <span class="likes-counter">${comment.likes}</span>
+                                <button class="like-button ${comment.liked ? 'active' : ''}" onclick="toggleLike(${index})">❤️</button>
+                            </div>
+                            <div>
+                                <button class="reply-button" onclick="replyToComment('${comment.name}', '${comment.text}')">Ответить</button>
+                            </div>
+                        </div>
+                        <div class="reply">
+                            ${renderReplies(comment.replies)}
+                        </div>
+                    </li>`;
+                ulElement.innerHTML += commentHTML;
+            });
+        }
+
+        // Функция для отображения ответов на комментарии
+        function renderReplies(replies) {
+            return replies.map(reply => `
+                <div class="reply-comment">
+                    <div><strong>${reply.name}</strong>: ${reply.text}</div>
+                </div>`).join('');
+        }
+
+        // Функция для добавления нового комментария или ответа
+        buttonEL.addEventListener('click', function () {
+            const name = nameInput.value.trim();
+            const text = textInput.value.trim();
+            let hasError = false;
+
+            // Проверка на пустые поля ввода
+            if (!name) {
+                nameInput.classList.add('error');
+                hasError = true;
+            } else {
+                nameInput.classList.remove('error');
+            }
+
+            if (!text) {
+                textInput.classList.add('error');
+                hasError = true;
+            } else {
+                textInput.classList.remove('error');
+            }
+
+            // Если есть ошибки, не отправляем комментарий
+            if (hasError) return;
+
+            const dateTime = new Date().toLocaleString('ru-RU', {
+                year: '2-digit',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            // Если в форме есть текст для ответа, добавляем в массив ответов
+            if (textInput.dataset.replyTo) {
+                const replyToIndex = textInput.dataset.replyTo;
+                comments[replyToIndex].replies.push({
+                    name: name,
+                    text: text,
+                });
+            } else {
+                // Добавляем новый комментарий в массив
+                comments.push({
+                    name: name,
+                    dateTime: dateTime,
+                    text: text,
+                    likes: 0,
+                    liked: false,
+                    replies: []
+                });
+            }
+
+            // Очищаем поля ввода и удаляем атрибут ответа
+            nameInput.value = '';
+            textInput.value = '';
+            delete textInput.dataset.replyTo; // Отменяем ответ
+            renderComments(); // Отрисовываем обновленный список
+        });
+
+        // Функция для переключения лайка
+        function toggleLike(index) {
+            comments[index].liked = !comments[index].liked;
+            comments[index].likes += comments[index].liked ? 1 : -1; // Изменяем количество лайков
+            renderComments(); // Отрисовываем обновленный список
+        }
+
+        // Функция для ответа на комментарий
+        function replyToComment(name, text) {
+            nameInput.value = name;
+            textInput.value = `Ответ на: ${text}`;
+            textInput.dataset.replyTo = comments.findIndex(comment => comment.name === name && comment.text === text);
+        }
+        
+        renderComments(); // Начальная отрисовка комментариев
+    </script>
 </body>
-
 </html>
