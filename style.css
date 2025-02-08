@@ -1,6 +1,20 @@
 body {
     margin: 0;
   }
+  
+  .new-comment {
+    width: 596px;
+    box-sizing: border-box;
+    background: radial-gradient(75.42% 75.42% at 50% 42.37%, rgba(53, 53, 53, 0) 22.92%, #7334ea 100%);
+    filter: drop-shadow(0px 20px 67px rgba(0, 0, 0, 0.08));
+    border-radius: 20px;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: 24px 0;
+  } 
+  
 
   .container {
     font-family: Helvetica;
@@ -68,6 +82,9 @@ body {
     display: flex;
     align-items: center;
   }
+  .liked {
+    color: red; /* Цвет кнопки, когда лайк установлен */
+}
 
   .like-button {
     all: unset;

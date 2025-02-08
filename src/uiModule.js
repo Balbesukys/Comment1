@@ -1,41 +1,47 @@
-// src/uiModule.js
-import { getComments } from './commentModule.js';
+// uiModule.js
+export function renderComments(comments) {
+    const commentsContainer = document.getElementById('commentsContainer'); 
+    commentsContainer.innerHTML = ''; // Очищаем контейнер перед рендерингом
 
-const ulElement = document.querySelector('.comments');
-
-export function renderComments() {
-    const comments = getComments();
-    ulElement.innerHTML = '';
     comments.forEach((comment, index) => {
-        const commentHTML = `
-            <li class="comment">
-                <div class="comment-header">
-                    <div>${comment.name}</div>
-                    <div>${comment.dateTime}</div>
-                </div>
-                <div class="comment-body">
-                    <div class="comment-text">${comment.text}</div>
-                </div>
-                <div class="comment-footer">
-                    <div class="likes">
-                        <span class="likes-counter">${comment.likes}</span>
-                        <button class="like-button ${comment.liked ? 'active' : ''}" onclick="window.toggleLike(${index})">❤️</button>
-                    </div>
-                     <div>
-                        <button class="reply-button" onclick="window.replyToComment('${comment.name}', '${comment.text}')">Ответить</button>
-                    </div>
+        const commentDiv = document.createElement('div');
+        commentDiv.className = 'new-comment';
+
+        commentDiv.innerHTML = `
+            <div class="comment-header">
+                <strong>${comment.name}</strong> <span>${new Date().toLocaleString()}</span>
+            </div>
+            <div class="comment-body">${comment.text}</div>
+            <div class="comment-footer">
+                <div class="likes">
+                    <span class="likes-counter">0</span>
+                    <button class="like-button">❤️</button>
                 </div>
                 <div class="reply">
-                    ${renderReplies(comment.replies)}
+                    <button class="reply-button" data-index="${index}">Ответить</button>
                 </div>
-            </li>`;
-        ulElement.innerHTML += commentHTML;
-    });
-}
+            </div>
+            <div class="replies"></div>
+            <div class="reply-input" style="display:none;">
+                <input type="text" class="reply-name" placeholder="Ваше имя">
+                <textarea class="reply-text" placeholder="Ваш ответ"></textarea>
+                <button class="submit-reply">Отправить</button>
+            </div>
+        `;
 
-export function renderReplies(replies) {
-    return replies.map(reply => `
-        <div class="reply-comment">
-            <div><strong>${reply.name}</strong>: ${reply.text}</div>
-        </div>`).join('');
+        // Отображаем ответы к комментарию, если они есть
+        if (comment.replies && comment.replies.length > 0) {
+            const repliesContainer = commentDiv.querySelector('.replies');
+            comment.replies.forEach(reply => {
+                const replyDiv = document.createElement('div');
+                replyDiv.className = 'reply-comment';
+                replyDiv.innerHTML = `
+                    <strong>${reply.name}</strong> <span>${reply.text}</span>
+                `;
+                repliesContainer.appendChild(replyDiv);
+            });
+        }
+
+        commentsContainer.appendChild(commentDiv);
+    });
 }

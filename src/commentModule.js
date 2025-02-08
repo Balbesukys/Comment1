@@ -1,4 +1,3 @@
-// src/commentModule.js
 let comments = [
     {
         name: "Роман М.",
@@ -16,6 +15,7 @@ let comments = [
         liked: true,
         replies: []
     }
+    
 ];
 // Экспортируйте переменную comments
 export { comments };
