@@ -2,61 +2,29 @@
 <html lang="ru">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Комментарии</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-<div class="container ">
-  <ul class="comments">
-    <li class="comment">
-      <div class="comment-header">
-        <div>Роман М.</div>
-        <div>16.01.25 12:24</div>
-      </div>
-      <div class="comment-body">
-        <div class="comment-text">Первый комментарий</div>
-      </div>
-      <div class="comment-footer">
-        <div class="likes">
-        <span class="likes-counter">10</span>
-        <button class="like-button" style="color: black;">🤍</button>
-        </div>
-      </div>
-    </li>
-    <li class="comment">  
-      <div class="comment-header">
-        <div>Алексей А.</div>
-        <div>16.01.25 19:58</div>
-      </div>
-      <div class="comment-body">
-        <div class="comment-text">
-          Мне нравится как оформленна эта страница!
-        </div>
-      </div>
-      <div class="comment-footer">
-        <div class="likes">
-          <span class="likes-counter">105</span>
-          <button class="like-button" style="color: black;">🤍</button>
-        </div>
-      </div>
-    </li>
-  </ul>
-  <div id="commentsContainer"></div>
-  <div class="add-comment" id="commentForm">
-    <input type="text" class="add-comment-name" id="nameInput" placeholder="Введите ваше имя">
-    <textarea type="text" class="add-comment-text" id="textInput"placeholder="Введите ваш комментарий" rows="4"></textarea>
-        <div class="add-comment-butt">
-            <button class="add-comment-button" id="submitComment">Отправить</button>
-          </div>
+    <div class="container">
+        <ul class="comments" id="commentsContainer">
+          <!-- Комментарии будут отображаться здесь -->
+        </ul>
+        <div class="add-comment" id="commentForm">
+            <input type="text" class="add-comment-name" id="nameInput" placeholder="Введите ваше имя">
+            <textarea class="add-comment-text" id="textInput" placeholder="Введите ваш комментарий" rows="4"></textarea>
+            <div class="add-comment-butt">
+                <button class="add-comment-button" id="submitComment">Отправить</button>
+            </div>
         </div>
     </div>
-  <script type="module" src="src/index.js" defer></script>
+
+    <script type="module" src="script.js"></script>
 </body>
+
 </html>
