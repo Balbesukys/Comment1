@@ -1,6 +1,6 @@
 // modules/comments.js
 export let comments = [
-    /*
+  /*
     { 
         name: "Роман М.",
         dateTime: "16.01.25 12:24",
@@ -20,6 +20,6 @@ export let comments = [
     */
 ];
 
-export const updateTasks = (newComments) => {
-    comments = newComments
-}
+export const updateComments = (newComments) => {
+  comments = newComments;
+};
