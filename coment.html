@@ -1,30 +1,32 @@
-<!DOCTYPE html>
-<html lang="ru">
+<!DOCTYPE html> 
+<html lang="ru"> 
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Комментарии</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="style.css" />
-</head>
+<head> 
+    <meta charset="UTF-8" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+    <title>Комментарии</title> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="style.css" /> 
+</head> 
 
-<body>
-    <div class="container">
-        <ul class="comments" id="commentsContainer">
-          <!-- Комментарии будут отображаться здесь -->
-        </ul>
-        <div class="add-comment" id="commentForm">
-            <input type="text" class="add-comment-name" id="nameInput" placeholder="Введите ваше имя">
-            <textarea class="add-comment-text" id="textInput" placeholder="Введите ваш комментарий" rows="4"></textarea>
-            <div class="add-comment-butt">
-                <button class="add-comment-button" id="submitComment">Отправить</button>
+<body> 
+    <div class="container"> 
+        <ul class="comments" id="commentsContainer"> 
+            <!-- Комментарии будут отображаться здесь --> 
+             
+        </ul> 
+        <div class="add-comment" id="commentForm"> 
+            <input type="text" class="add-comment-name" id="nameInput" placeholder="Введите ваше имя"> 
+            <textarea class="add-comment-text" id="textInput" placeholder="Введите ваш комментарий" rows="4"></textarea> 
+            <div class="add-comment-butt"> 
+                <button class="add-comment-button" id="submitComment">Отправить</button> 
             </div>
-        </div>
-    </div>
+            <div id="responseMessage" class="response-message"></div> <!-- для вывода ответа -->
+        </div> 
+    </div> 
 
-    <script type="module" src="script.js"></script>
-</body>
+    <script type="module" src="script.js"></script> 
+    <script type="module" src="./modules/eventHandlers.js"></script> 
+</body> 
 
 </html>

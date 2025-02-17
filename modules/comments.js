@@ -1,6 +1,7 @@
 // modules/comments.js
-export const comments = [
-    {
+export let comments = [
+    /*
+    { 
         name: "Роман М.",
         dateTime: "16.01.25 12:24",
         text: "Первый комментарий",
@@ -16,4 +17,9 @@ export const comments = [
         liked: false,
         replies: []
     }
+    */
 ];
+
+export const updateTasks = (newComments) => {
+    comments = newComments
+}
