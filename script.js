@@ -8,11 +8,3 @@ document.addEventListener('DOMContentLoaded', () => {
     addEventHandlers(comments, renderComments); // Передаем массив комментариев и рендер-функцию
 });
 // script.js
-fetch('https://wedev-api.sky.pro/api/v1/alex-arkhipov/comments')
-    .then((response) => {
-        return response.json()
-    })
-    .then((data) => {
-        updateComments(data.comments)
-        renderUserComments()
-    })
