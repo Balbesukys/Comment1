@@ -7,3 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
     renderComments(comments); // Отображаем комментарии при загрузке
     addEventHandlers(comments, renderComments); // Передаем массив комментариев и рендер-функцию
 });
+fetch('https://wedev-api.sky.pro/api/v1/alex-arkhipov/comments')
+    .then((response) => {
+        return response.json()
+    })
+    .then((data) => {
+        updateComments(data.comments)
+        renderUserComments()
+    })
