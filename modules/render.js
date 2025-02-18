@@ -1,6 +1,7 @@
 import { userComments } from "./comments.js";
 
 export const renderCommentsFunction = () => {
+  //функция рендера комментариев
   const ulElement = document.getElementById("commentsContainer");
   const userCommentsHtml = userComments
     .map((userComment, index) => {
@@ -18,7 +19,7 @@ export const renderCommentsFunction = () => {
                         <span class="likes-counter">${userComment.likes}</span>
                         <button class="like-button ${
                           userComment.isLiked ? "-active-like" : " "
-                        }" id="like-${index}"></button>
+                        }" id="like-${index}"></button> 
                     </div>
                 </div>
                </li>`;
