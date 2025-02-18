@@ -1,11 +1,11 @@
 // modules/renderComments.js
 import { replyToComment, toggleLike } from "./eventHandlers.js";
 
-export function renderComments(comments) {
+export function renderComments(userComments) {
   const ulElement = document.getElementById("commentsContainer");
   ulElement.innerHTML = ""; // Очищаем текущее содержимое
 
-  comments.forEach((comment, index) => {
+  userComments.forEach((comment, index) => {
     const commentHTML = `
             <li class="comment">
                 <div class="comment-header">
@@ -23,7 +23,7 @@ export function renderComments(comments) {
                     </div>
                 </div>
                 <div class="reply">
-                    ${renderReplies(comment.replies)}
+
                 </div>
             </li>`;
 
@@ -31,22 +31,22 @@ export function renderComments(comments) {
 
     // Добавляем обработчики событий
     document.getElementById(`reply-${index}`).onclick = function () {
-      replyToComment(comments, index, renderComments); // Передаем рендер функцию в обработчик
+      replyToComment(userComments, index, renderComments); // Передаем рендер функцию в обработчик
     };
 
     document.getElementById(`like-${index}`).onclick = function () {
-      toggleLike(comments, index, renderComments); // Передаем рендер функцию в обработчик
+      toggleLike(userComments, index, renderComments); // Передаем рендер функцию в обработчик
     };
   });
 }
 
-function renderReplies(replies) {
-  return replies
-    .map(
-      (reply) => `
-        <div class="reply-comment">
-            <div><strong>${reply.name}</strong>: ${reply.text}</div>
-        </div>`
-    )
-    .join("");
-}
+// function renderReplies(replies) {
+//   return replies
+//     .map(
+//       (reply) => `
+//         <div class="reply-comment">
+//             <div><strong>${reply.name}</strong>: ${reply.text}</div>
+//         </div>`
+//     )
+//     .join("");
+// }                     ${renderReplies(comment.replies)} <= это было на 26 строчке
