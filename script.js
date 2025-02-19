@@ -1,12 +1,6 @@
-import { renderCommentsFunction } from "./modules/render.js";
 import { addCommemt, getDataUserComments } from "./modules/functions.js";
 
-// import { renderComments } from "./modules/renderComments.js";
-// import { addEventHandlers } from "./modules/eventHandlers.js";
-getDataUserComments(); //получение данных с сервера (комментарии)
-// document.addEventListener("DOMContentLoaded", () => {
-//   renderComments(userComments); // Отображаем комментарии при загрузке
-//   addEventHandlers(userComments, renderComments); // Передаем массив комментариев и рендер-функцию
-// });
-addCommemt();
-renderCommentsFunction(); //рендер комментариев
+addCommemt(); //функция добавления комментария, в ней зашита отправка данных на сервер по методу POST.
+getDataUserComments(); //функция получения данных с сервера, последовательность функций важна!
+// потому что по документации API при отправке данных по методу POST нам возвращается не обновленнных массив данных,
+// а ответ с результатом "ОК" или ошибкой. Поэтому данные нужно снова получить методом GET.
