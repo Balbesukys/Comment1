@@ -2,7 +2,7 @@ import { updateComments, userComments } from "./comments.js";
 import { renderCommentsFunction } from "./render.js";
 export const getDataUserComments = () => {
   //функция получения данных от сервера ( массив комментариев)
-  fetch("https://wedev-api.sky.pro/api/v1/lexarh/comments")
+  fetch("https://wedev-api.sky.pro/api/v1/lexarkh/comments")
     .then((response) => {
       return response.json();
     })
@@ -29,7 +29,7 @@ export const userLike = () => {
   const likeButtonElements = document.querySelectorAll(".like-button");
   for (const likeButtonElement of likeButtonElements) {
     likeButtonElement.addEventListener("click", (event) => {
-      event.stopPropagation(); //остановка функции цитаты комментария конкретно на кнопку лайка
+      event.stopPropagation();
       const indexLike = likeButtonElement.dataset.index;
 
       if (userComments[indexLike].isLiked === false) {
@@ -45,8 +45,6 @@ export const userLike = () => {
   }
 };
 export const textQuote = () => {
-  //функция добавления цитаты, при нажатии на любое место в нужном комментарии,
-  // кроме кнопки лайка, для этого в функцию добавления лайков добавлена функция stopPropagation()
   const cemmentElements = document.querySelectorAll(".comment");
   for (const commentElement of cemmentElements) {
     commentElement.addEventListener("click", () => {
@@ -91,7 +89,7 @@ export const addCommemt = () => {
       isLiked: false,
     };
 
-    fetch("https://wedev-api.sky.pro/api/v1/lexarh/comments", {
+    fetch("https://wedev-api.sky.pro/api/v1/lexarkh/comments", {
       method: "POST",
       body: JSON.stringify(newComment),
     })
