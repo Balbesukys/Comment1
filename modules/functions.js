@@ -1,5 +1,5 @@
 import { updateComments, userComments } from "./comments.js";
-import { renderCommentsFunction } from "./render.js";
+import { renderCommentsFunction } from "./renderComments.js";
 export const getDataUserComments = () => {
   //функция получения данных от сервера ( массив комментариев)
   fetch("https://wedev-api.sky.pro/api/v1/lexarkh/comments")
