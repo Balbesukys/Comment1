@@ -1,6 +1,8 @@
+// renderComment.js
 import { userComments } from "./comments.js";
-import { formatDate, userLike, textQuote } from "./functions.js";
-
+import { formatDate } from "./dateUtils.js"; // Предполагаем, что функция formatDate в dateUtils.js
+import { sanitizeHtml } from "./htmlUtils.js"; // Импортируем функцию для очистки HTML
+import { userLike, textQuote } from "./functions.js";
 export const renderCommentsFunction = () => {
   //функция рендера комментариев
   const ulElement = document.getElementById("commentsContainer");

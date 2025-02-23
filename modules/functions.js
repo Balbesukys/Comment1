@@ -105,7 +105,6 @@ export const addCommemt = () => {
       });
 
     textInput.value = ""; //очистка полей ввода
-    nameInput.value = "";
+    nameInput.value = ""; 
   });
-  renderCommentsFunction();
 };
